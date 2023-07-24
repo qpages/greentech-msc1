@@ -13,6 +13,7 @@ import { Separator } from "@/components/ui/separator";
 
 function VineyardIndicators() {
   const [progress, setProgress] = useState(0);
+  const [health, setHealth] = useState(0);
   const [water, setWater] = useState(0);
   const [harvest, setHarvest] = useState(0);
 
@@ -28,6 +29,11 @@ function VineyardIndicators() {
 
   useEffect(() => {
     const timer = setTimeout(() => setHarvest(17.9), 900);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setHealth(92.4), 1200);
     return () => clearTimeout(timer);
   }, []);
 
@@ -79,10 +85,21 @@ function VineyardIndicators() {
           <h3 className="text-lg font-medium opacity-80">Prediction</h3>
           <div className="flex flex-col gap-2 rounded-md border border-slate-100 p-2">
             <span className="text-lg font-semibold opacity-80">
-              Harvesting time estimation 🍷
+              Vineyard health 🍇
             </span>
             <div className="flex items-center gap-2">
               <span className="font-semibold text-pink-700 opacity-90">
+                92.4%
+              </span>
+              <Progress value={health} className="w-[80%]" />
+            </div>
+          </div>
+          <div className="flex flex-col gap-2 rounded-md border border-slate-100 p-2">
+            <span className="text-lg font-semibold opacity-80">
+              Harvesting time estimation 🍷
+            </span>
+            <div className="flex items-center gap-2">
+              <span className="font-semibold text-rose-700 opacity-90">
                 17.9%
               </span>
               <Progress value={harvest} className="w-[80%]" />
